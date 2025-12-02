@@ -67,7 +67,8 @@ namespace inrange
 
     constexpr bool CounterIterator::operator==(const CounterIterator &another) const
     {
-        return (number - another.number > 0) ^ (number - step - another.number > 0);
+        return step > 0 ? (number - another.number >= 0) ^ (number - step - another.number > 0)
+                        : (number - another.number <= 0) ^ (number - step - another.number < 0);
     }
 
     constexpr bool CounterIterator::operator!=(const CounterIterator &another) const
@@ -131,3 +132,4 @@ constexpr inline inrange::LazyEvaluationList in(const inrange::LazyEvaluationLis
 }
 
 #endif
+
